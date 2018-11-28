@@ -17,15 +17,26 @@ class Paddle {
     constructor(gameWidth, gameHeight) {
         this.width = 150;
         this.height = 15;
+        this.maxSpeed = 10;
+        this.speed = 0;
         
         this.position = {
             x: gameWidth / 2 - this.width / 2,
             y: gameHeight - this.height - 10
         };
     }
+
+    moveLeft() {
+        alert("Move left method");
+        this.speed = -this.maxSpeed;
+    }
+
+    moveRight() {
+
+    }
     
     draw(ctx) {
-        console.log("Paddle class");
+        // console.log("Paddle class");
         ctx.fillStyle = "#048";
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
@@ -33,6 +44,7 @@ class Paddle {
     update(deltaTime) {
         if(!deltaTime) return;
         // this.position.x += 5 / deltaTime;
+        this.position.x += this.speed; 
     }
 }
 
@@ -43,15 +55,15 @@ paddle.draw(ctx);
 
 // input.js code
 class InputHandler {
-    constructor() {
+    constructor(paddle) {
         document.addEventListener("keydown", event => {
             // alert(event.keyCode);
-            switch(event.keyCode) {
+            switch(event.keycode) {
                 case 37:
-                    alert("Move left");
+                    paddle.moveLeft();
                     break;
                 case 39:
-                    alert("Move right");
+                    paddle.moveRight();
                     break;
             }
         });
@@ -59,9 +71,9 @@ class InputHandler {
 }
 // end of input.js code
 
-new InputHandler();
+new InputHandler(paddle);
 let lastTime = 0;
-console.log(lastTime);
+// console.log(lastTime);
 function gameLoop(timeStamp) {
     let deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;

@@ -10,7 +10,7 @@ export default class Paddle {
     }
     
     draw(ctx) {
-        console.log("Paddle class");
+        // console.log("Paddle class");
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 }
